@@ -1,4 +1,4 @@
-const GOOGLE_BOOKS_API_KEY = 'AIzaSyDOb1zuFggFwoXxoHpEF6SlkGWfuz7a9X4'; // Not best practice, but for this prototype i allow it
+const GOOGLE_BOOKS_API_KEY = ''; 
 
 export const fetchBooks = async (query: string): Promise<any> => {
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
