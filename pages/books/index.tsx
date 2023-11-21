@@ -1,7 +1,6 @@
 // pages/books/index.tsx
 import Link from 'next/link';
 import { useEffect, useState, useContext } from 'react';
-// import { useRouter } from 'next/router';
 import { fetchBooks } from '@pages/api/fetchBooks';
 import BookCard from '@components/BookCard';
 import ShoppingCartIcon from '@components/ShoppingCartIcon'; // Import ShoppingCartIcon
@@ -11,7 +10,6 @@ import useSearchQueryFromURL from '@hooks/useSearchQueryFromURL';
 
 const BooksPage: React.FC = () => {
   const [books, setBooks] = useState([]);
-  // const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false); // Add loading state
   const { cart } = useContext(CartContext);
@@ -25,7 +23,7 @@ const BooksPage: React.FC = () => {
     } catch (error) {
       // Handle error
     } finally {
-      setLoading(false); // Set loading to false when API call completes (either success or failure)
+      setLoading(false); 
     }
   };
 
