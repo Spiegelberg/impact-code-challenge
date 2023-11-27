@@ -6,7 +6,6 @@ import BookCard from '@components/BookCard';
 import ShoppingCartIcon from '@components/ShoppingCartIcon'; // Import ShoppingCartIcon
 import { CartContext } from '@context/CartContext'; // Import CartContext
 import SearchBar from '@components/SearchBar';
-import useSearchQueryFromURL from '@hooks/useSearchQueryFromURL'; 
 
 const BooksPage: React.FC = ({ books }) => {
   const [searchedBooks, setSearchedBooks] = useState(books);
