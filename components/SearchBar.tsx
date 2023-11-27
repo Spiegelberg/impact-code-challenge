@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import useSearchQueryFromURL from '../hooks/useSearchQueryFromURL';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
