@@ -49,12 +49,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, loading }) => {
         value={searchQuery}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        placeholder="Search for books..."
+        placeholder="What book would you like to find..."
         className="w-full text-black border p-2"
       />
       <button
         onClick={handleSearch}
-        className="bg-blue-500 text-white px-4 py-2 "
+        className="bg-amber-400 text-white px-4 py-2 "
       >
         {loading ? (
           <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

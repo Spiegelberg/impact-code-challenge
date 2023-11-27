@@ -15,7 +15,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="relative flex place-items-center flex-1 ml-1">
+      <div className="relative flex place-items-center flex-1 ml-1 w-3/4">
         <SearchBar onSearch={(query) => console.log('Search:', query)} />
       </div>
 
