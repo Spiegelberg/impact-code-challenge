@@ -1,14 +1,9 @@
 // next.config.js
-const withImages = require('next-images');
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    domains: ['books.google.com']
+  }
+}
 
-module.exports = withImages({
-  reactStrictMode: true,
-  webpack(config, options) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-
-    return config;
-  },
-});
+module.exports = nextConfig
