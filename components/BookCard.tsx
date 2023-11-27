@@ -1,6 +1,7 @@
 // components/BookCard.tsx
 import React, { useContext } from 'react';
 import Link from 'next/link';
+import Image from 'next/image'
 import { CartContext } from '@context/CartContext';
 
 interface BookCardProps {
@@ -34,19 +35,74 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
   };
 
   return (
-    <div key={book.id} className="bg-white p-4 rounded-md shadow-sm transition-transform transform hover:shadow-lg">
+    <figure key={book.id} className="md:flex bg-slate-100 rounded-xl p-8 md:p-0 ">
+      <div className='relative w-full'>
+      {book.volumeInfo.imageLinks && (
+        <Image 
+          className="book-card-image w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" 
+          src={book.volumeInfo.imageLinks.thumbnail}
+          alt=""
+          fill={true}
+          
+          />
+      )}
+    </div>
+  <div className="md:p-8 text-center md:text-left space-y-4">
+  <h2 className="text-xl font-semibold mb-2">
+        <Link className="text-blue-500 hover:underline ml-1" href={`/books/${book.id}`}>
+        {book.volumeInfo.title}
+        </Link>
+      </h2>
+    {book.volumeInfo.description && (
+        <blockquote>
+          <p className="text-lg font-medium">
+          {book.volumeInfo.description.length > 200 ? (
+            <>
+              {book.volumeInfo.description.slice(0, 200)}...
+              <Link className="text-blue-500 hover:underline ml-1" href={`/books/${book.id}`}>
+                Read More
+              </Link>
+            </>
+          ) : (
+            book.volumeInfo.description
+          )}
+          </p>
+        </blockquote>
+      )}
+    {/* <blockquote>
+      <p className="text-lg font-medium">
+        “Tailwind CSS is the only framework that I've seen scale
+        on large teams. It’s easy to customize, adapts to any design,
+        and the build size is tiny.”
+      </p>
+    </blockquote> */}
+    <figcaption className="font-medium">
+      <div className="text-sky-500 dark:text-sky-400">
+      {book.volumeInfo.authors && book.volumeInfo.authors.join(', ')}
+      </div>
+      <div className="text-slate-700 dark:text-slate-500">
+      {book.volumeInfo.publisher} | {book.volumeInfo.publishedDate} | {book.volumeInfo.pageCount} pages
+      </div>
+    </figcaption>
+  </div>
+</figure>
+    /* <div key={book.id} className="bg-white p-4 rounded-md shadow-sm transition-transform transform hover:shadow-lg">
       <h2 className="text-xl font-semibold mb-2">
         <Link className="text-blue-500 hover:underline ml-1" href={`/books/${book.id}`}>
         {book.volumeInfo.title}
         </Link>
       </h2>
+      <div>
+
       {book.volumeInfo.imageLinks && (
-        <img
-          src={book.volumeInfo.imageLinks.thumbnail}
-          alt={book.volumeInfo.title}
-          className="mb-2 rounded-md"
+        <Image
+        src={book.volumeInfo.imageLinks.thumbnail}
+        alt={book.volumeInfo.title}
+        fill={true}
+        className="mb-2 rounded-md"
         />
-      )}
+        )}
+        </div>
 
       <p className="text-gray-700 mb-2">
         {book.volumeInfo.authors && book.volumeInfo.authors.join(', ')}
@@ -70,7 +126,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
         </div>
       )}
 
-      {/* Toggle Cart button */}
+      
       <button
         onClick={handleToggleCart}
         className={`px-4 py-2 rounded mt-3 ${
@@ -79,7 +135,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
       >
         {isBookInCart ? 'Remove from Cart' : 'Add to Cart'}
       </button>
-    </div>
+    </div> */
   );
 };
 
