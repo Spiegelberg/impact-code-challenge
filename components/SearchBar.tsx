@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 interface SearchBarProps {
   onSearch: (query: string) => void;
   loading: boolean;
+  shadow: boolean;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, loading }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, loading, shadow }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
   
@@ -43,18 +44,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, loading }) => {
   }, [router.query]); // Re-run the effect when the query parameter changes
 
   return (
-    <div className="my-4 flex flex-1">
+    <div className={`my-4 flex flex-1 ${shadow ? 'drop-shadow-orange hover:drop-shadow-orange-sm':''} transition duration-300 ease-in-out`}>
       <input
         type="text"
         value={searchQuery}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         placeholder="What book would you like to find..."
-        className="w-full text-black border p-2"
+        className="w-full text-black border p-2 "
       />
       <button
         onClick={handleSearch}
-        className="bg-amber-400 text-white px-4 py-2 "
+        className="bg-book-orange text-white px-4 py-2 "
       >
         {loading ? (
           <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

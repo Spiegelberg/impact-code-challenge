@@ -36,11 +36,11 @@ const BooksPage: React.FC = ({ books }) => {
   // useSearchQueryFromURL(handleSearch);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-grey-100">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-bold">Book Browsing</h1>
+        {/* <h1 className="text-3xl font-bold">Book Browsing</h1> */}
         <div className="flex w-full items-center flex-1 ml-3">
-          <SearchBar onSearch={handleSearch} loading={loading} />
+          <SearchBar onSearch={handleSearch} loading={loading} shadow={false} />
           <ShoppingCartIcon /> {/* Include ShoppingCartIcon */}
         </div>
       </div>
@@ -49,7 +49,7 @@ const BooksPage: React.FC = ({ books }) => {
       {loading ? (
         <p className='text-center'>fetching books from google ...</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4 h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 mt-4 h-full">
           {searchedBooks.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}
