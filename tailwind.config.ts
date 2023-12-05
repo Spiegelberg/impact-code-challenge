@@ -13,8 +13,13 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'book-orange': '#FF4E20'
+      },
       dropShadow: {
         'special': '10px 10px 5px rgba(0, 0, 0, 0.20)',
+        'orange': '0px 0px 25px rgba(254, 78, 32, 0.15)',
+        'orange-sm': '0px 0px 5px rgba(254, 78, 32, 0.25)',
       }
     },
   },
