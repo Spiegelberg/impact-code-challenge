@@ -18,6 +18,15 @@ interface BookCardProps {
         thumbnail: string;
       };
     };
+    saleInfo: {
+      buyLink?: string;
+      country?: string;
+      isEbook?: boolean;
+      listPrice?: {
+        amount?: number;
+        currencyCode?: string
+      }
+    }
   };
 }
 
@@ -35,10 +44,10 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
 
   return (
     <figure key={book.id} className="md:flex  p-8 md:p-0 ">
-      <div className='relative w-full'>
+      <div className='relative w-full h-auto'>
       {book.volumeInfo.imageLinks && (
         <Image 
-          className="book-card-image w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto drop-shadow-special" 
+          className="book-card-image md:rounded-none rounded-full mx-auto drop-shadow-special" 
           src={book.volumeInfo.imageLinks.thumbnail}
           alt=""
           fill={true}
@@ -46,12 +55,20 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
           />
       )}
     </div>
-    <div className="md:p-8 text-center md:text-left space-y-4">
-      <h2 className="text-xl font-semibold mb-2">
-        <Link className="text-black-500 hover:underline" href={`/books/${book.id}`}>
-          {book.volumeInfo.title}
-        </Link>
-      </h2>
+    <div className="flex flex-col md:p-8 text-center md:text-left">
+      <div className="flex justify-between items-center mb-1">
+        <h2 className="text-xl font-semibold">
+          <Link className="text-black-500 hover:underline" href={`/books/${book.id}`}>
+            {book.volumeInfo.title}
+          </Link>
+        </h2>
+        <span className="text-sm font-light text-slate-300 dark:text-slate-400">
+          ({book.volumeInfo.pageCount} pages)
+        </span>
+      </div>
+      <p className="font-light text-slate-300 dark:text-slate-400 mb-5">
+        {book.volumeInfo.publisher} ({book.volumeInfo.publishedDate?.split('-')[0]})
+        </p>
       {book.volumeInfo.description && (
         <blockquote>
           <p className="text-md font-normal">
@@ -68,22 +85,30 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
           </p>
         </blockquote>
       )}
-      <figcaption className="font-medium">
-        <div className="font-bold ">
+      <figcaption className="font-medium mt-1">
+        <div className="font-bold">
         {book.volumeInfo.authors && book.volumeInfo.authors.join(', ')}
         </div>
-        <div className="font-light text-slate-300 dark:text-slate-400">
-        {book.volumeInfo.publisher} | {book.volumeInfo.publishedDate} | {book.volumeInfo.pageCount} pages
-        </div>
       </figcaption>
-      <button
+      { book.saleInfo.listPrice?.amount && (
+        <div className='flex justify-between items-center  mt-5'>
+            <h1 className='text-xl font-semibold' title={book.saleInfo.listPrice?.amount}>
+              <>
+               <Link className='' href={`${book.saleInfo.buyLink}`} target='_blank'>
+                  {Math.round(book.saleInfo.listPrice?.amount)} {book.saleInfo.listPrice?.currencyCode}
+               </Link>
+              </>
+            </h1>
+          <button
           onClick={handleToggleCart}
-          className={`px-4 py-2 rounded mt-3 ${
+          className={`px-4 py-2 rounded ${
             isBookInCart ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-emerald-600 text-white hover:bg-emerald-700'
           }`}
-        >
-          {isBookInCart ? 'Remove from Cart' : 'Add to Cart'}
-        </button>
+          >
+            {isBookInCart ? 'Remove from Cart' : 'Add to Cart'}
+          </button>
+          </div>
+          )}
     </div>
   </figure>
   );
